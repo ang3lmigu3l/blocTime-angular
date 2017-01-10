@@ -20,7 +20,7 @@
             scope: { },
             link: function(scope, element, attributes) {
                 scope.workTime = 1500;
-                scope.buttonText = "Start";
+                scope.buttonText = "START";
                 
                 var timeSet;
                 
@@ -30,7 +30,7 @@
                    {
                        $interval.cancel(timeSet);
                        scope.workTime = 1500;
-                       scope.buttonText = "Start";
+                       scope.buttonText = "START";
                    }
                    else
                    {
@@ -38,15 +38,15 @@
                    }
                 }
                 scope.startTimer = function() {
-                     if(scope.buttonText == "Reset") {
+                     if(scope.buttonText == "RESET") {
                          scope.workTime = 1500;
                          $interval.cancel(timeSet);
-                         scope.buttonText = "Start";
+                         scope.buttonText = "START";
                          console.log( "test restarted");
 
                      } else {
                          timeSet = $interval(scope.countdown,1000);
-                         scope.buttonText = "Reset";
+                         scope.buttonText = "RESET";
                          console.log("test started");
                      }
                 }
@@ -60,4 +60,4 @@
         .module('blocTime', ['ui.router', 'firebase'])
         .config(config)
         .directive('myButton',['$interval', myButton]);
-
+})();
