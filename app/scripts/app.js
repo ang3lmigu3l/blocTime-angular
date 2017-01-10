@@ -60,4 +60,4 @@
         .module('blocTime', ['ui.router', 'firebase'])
         .config(config)
         .directive('myButton',['$interval', myButton]);
-})();
+
