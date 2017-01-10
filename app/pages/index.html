@@ -1,0 +1,33 @@
+<!DOCTYPE html>
+<html ng-app="blocTime">
+<head lang="en">
+    <meta charset="UTF-8">
+    <title>BlocTime</title>
+    <link rel="stylesheet" href="/styles/style.css">
+</head>
+<body>
+    
+    <ui-view></ui-view>
+    
+    
+    <script src="https://www.gstatic.com/firebasejs/3.6.4/firebase.js"></script>
+    <script>
+      // Initialize Firebase
+      var config = {
+        apiKey: "AIzaSyCMbzRtwTEMFPbbN_HmYG3MmH1-jtxSrg8",
+        authDomain: "bloctime-24ff9.firebaseapp.com",
+        databaseURL: "https://bloctime-24ff9.firebaseio.com",
+        storageBucket: "bloctime-24ff9.appspot.com",
+        messagingSenderId: "651070838921"
+      };
+      firebase.initializeApp(config);
+    </script>
+    <script src="https://ajax.googleapis.com/ajax/libs/angularjs/1.5.7/angular.min.js"></script>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/angular-ui-router/0.2.15/angular-ui-router.min.js"></script> 
+    <script src="https://www.gstatic.com/firebasejs/3.6.4/firebase.js"></script>
+    <script src="https://cdn.firebase.com/libs/angularfire/2.2.0/angularfire.min.js"></script>
+    <script src="/scripts/app.js"></script>
+    <script src="/scripts/filters/timecode.js"></script>
+     
+    </body>
+</html>
