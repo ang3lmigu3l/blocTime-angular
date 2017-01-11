@@ -13,6 +13,7 @@
                 // 
                 scope.onBreakreak = false; 
                 // starts countdown from current work/break time 
+                scope.timerText = "Work Timer";
                 var timeSet;
                 
                                 
@@ -20,12 +21,14 @@
                     $interval.cancel(timeSet);
                     scope.workTime = MY_TIMES.break; 
                     scope.buttonText = "START";
-                    scope.onBreak = true;                   
+                    scope.onBreak = true;  
+                    scope.timerText = "Break Timer";
                 };
                 
                 var setWork = function() {
                     $interval.cancel(timeSet);
                     scope.workTime = MY_TIMES.work;
+                    scope.timerText = "Work Timer";
                     scope.buttonText = "START";   
                     scope.onBreak = false;
                     
@@ -75,7 +78,7 @@
         .module('blocTime')
         .directive('myButton',['$interval', 'MY_TIMES', myButton])
         .constant("MY_TIMES", {
-            "work": 5,
-            "break": 3
+            "work": 60 * 25,
+            "break": 60 * 5
         });
 })();
