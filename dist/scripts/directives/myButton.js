@@ -14,6 +14,9 @@
                 scope.onBreakreak = false; 
                 // starts countdown from current work/break time 
                 scope.timerText = "Work Timer";
+                
+                var completedSessions = 0;
+                
                 var timeSet;
                 
                                 
@@ -34,16 +37,31 @@
                     
                 };
                 
+                var setLongBreak = function() {
+                    $interval.cancel(timeSet);
+                    scope.workTime = MY_TIMES.long_break; 
+                    scope.buttonText = "START";
+                    scope.onBreak = true;  
+                    scope.timerText = "Long Break Timer";
+                }
+                
                 scope.countdown = function() {
                    if(scope.workTime <= 0){
                        //if countdown reaches 0  and is on break , set time to 25m (work) 
                            if (scope.onBreak) {
-                               setWork();
                                console.log("currently working");
+                               setWork();
+                               
                         // else set timer for 5m  and starts break timer.
+                           } else if (scope.onBreak === false && completedSessions === 4 ){
+                               completedSessions = 0;
+                               setLongBreak();
                            } else {
-                               setBreak();
                                console.log('currently on break');
+                               completedSessions += 1;
+                               console.log(completedSessions);
+                               setBreak();
+
                            };
                    }else{
                     //countdown 
@@ -78,7 +96,8 @@
         .module('blocTime')
         .directive('myButton',['$interval', 'MY_TIMES', myButton])
         .constant("MY_TIMES", {
-            "work": 60 * 25,
-            "break": 60 * 5
+            "work": 2,
+            "break": 1,
+            "long_break": 3
         });
 })();
