@@ -10,8 +10,9 @@
                 scope.workTime = MY_TIMES.work;
                 // sets default button as Start 
                 scope.buttonText = "START";
-                // 
-                scope.onBreakreak = false; 
+                // var to check if on break/long-break
+                scope.onBreak = false; 
+                scope.onLongBreak = false;
                 // starts countdown from current work/break time 
                 scope.timerText = "Work Timer";
                 
@@ -19,9 +20,12 @@
                 
                 var timeSet;
                 
+                var stopTimer = function() {
+                    $interval.cancel(timeSet);
+                };
+                
                                 
                 var setBreak =  function() {
-                    $interval.cancel(timeSet);
                     scope.workTime = MY_TIMES.break; 
                     scope.buttonText = "START";
                     scope.onBreak = true;  
@@ -29,7 +33,6 @@
                 };
                 
                 var setWork = function() {
-                    $interval.cancel(timeSet);
                     scope.workTime = MY_TIMES.work;
                     scope.timerText = "Work Timer";
                     scope.buttonText = "START";   
@@ -38,31 +41,32 @@
                 };
                 
                 var setLongBreak = function() {
-                    $interval.cancel(timeSet);
                     scope.workTime = MY_TIMES.long_break; 
                     scope.buttonText = "START";
-                    scope.onBreak = true;  
+                    scope.onBreak = false; 
+                    scope.onLongBreak = true;
                     scope.timerText = "Long Break Timer";
-                }
+                    completedSessions = 0;
+                };
                 
                 scope.countdown = function() {
-                   if(scope.workTime <= 0){
+                   if(scope.workTime <= 0){ 
+                       stopTimer();
                        //if countdown reaches 0  and is on break , set time to 25m (work) 
-                           if (scope.onBreak) {
-                               console.log("currently working");
-                               setWork();
-                               
-                        // else set timer for 5m  and starts break timer.
-                           } else if (scope.onBreak === false && completedSessions === 4 ){
-                               completedSessions = 0;
+                       if (scope.onBreak) {
+                           console.log("currently working");
+                           setWork();
+                       } else {
+                           completedSessions += 1;
+                           console.log(completedSessions);
+                           // if 4 work sessions are completed and not on break set time to long break 
+                           if (completedSessions === 4) {
                                setLongBreak();
                            } else {
-                               console.log('currently on break');
-                               completedSessions += 1;
-                               console.log(completedSessions);
                                setBreak();
-
                            };
+
+                       };
                    }else{
                     //countdown 
                     scope.workTime--;
@@ -72,15 +76,16 @@
                            
                 scope.toggleTimer = function() {
                      if(scope.buttonText == "RESET") {
+                         stopTimer();
                          if (scope.onBreak) {
                              setBreak();
-                             console.log("restart break Timer")
-                                
+                             console.log("restart break Timer") 
+                         } else if (scope.onLongBreak){
+                             setLongBreak();  
                          } else {
                              setWork();
                              console.log( "restarted work timer");
                          };
-
                      } else {
                          timeSet = $interval(scope.countdown,1000);
                          scope.buttonText = "RESET";
@@ -96,8 +101,8 @@
         .module('blocTime')
         .directive('myButton',['$interval', 'MY_TIMES', myButton])
         .constant("MY_TIMES", {
-            "work": 2,
-            "break": 1,
-            "long_break": 3
+            "work": 5,
+            "break": 3,
+            "long_break": 10
         });
 })();
