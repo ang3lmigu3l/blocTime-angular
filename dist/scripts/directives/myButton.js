@@ -101,8 +101,8 @@
         .module('blocTime')
         .directive('myButton',['$interval', 'MY_TIMES', myButton])
         .constant("MY_TIMES", {
-            "work": 5,
-            "break": 3,
-            "long_break": 10
+            "work": 60 *25,
+            "break": 60 * 5,
+            "long_break": 60 * 30
         });
 })();
