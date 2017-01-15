@@ -20,9 +20,14 @@
                 
                 var timeSet;
                 
+                var mySound = new buzz.sound("/assets/sounds/notify.mp3", {
+                    preload: true 
+                });
+                
                 var stopTimer = function() {
                     $interval.cancel(timeSet);
                 };
+                
                 
                                 
                 var setBreak =  function() {
@@ -48,6 +53,13 @@
                     scope.timerText = "Long Break Timer";
                     completedSessions = 0;
                 };
+                
+                scope.$watch('workTime', function(value){
+                    if (value <= 0 ) {
+                        console.log("sound play sound")
+                        mySound.play();
+                    }     
+                });
                 
                 scope.countdown = function() {
                    if(scope.workTime <= 0){ 
@@ -101,7 +113,7 @@
         .module('blocTime')
         .directive('myButton',['$interval', 'MY_TIMES', myButton])
         .constant("MY_TIMES", {
-            "work": 60 *25,
+            "work": 60 * 25,
             "break": 60 * 5,
             "long_break": 60 * 30
         });
