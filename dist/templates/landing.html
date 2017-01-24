@@ -1,11 +1,11 @@
 
 <div class="container">
     <div class="left-panel">
-
+        <h1> Task History</h1>
         <input ng-model="task" type="text" placeholder="Enter task..."></input>
         <button ng-click="addTask()" class="btn btn-default">Add Task</button>
         <ul class="list-group">
-          <li  ng-repeat="task in tasks " class="list-group-item">{{ task.name }}</li>      
+          <li  ng-repeat="task in tasks | orderBy: 'created_at':true" class="list-group-item">{{ task.name  }}</li>      
         </ul>
     </div>
     <div class="right-panel">
