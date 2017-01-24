@@ -30,19 +30,8 @@ body {
     float:right;
     width:65%;
 }
-.pomodoro-btn{
-    background-color:#8fcfe1;
-    text-align: center; 
-    border: solid #5abdcc 1px;
-    border-width: 1px;
-    border-radius: 15%;
-    padding: 0px 20px 0px 20px;
-    
-}
-.pomodoro-btn p {
-    font-family: 'Roboto', sans-serif;
-    color: white;
-}
+
+
 
 #time {
     font-family: 'Orbitron', sans-serif;

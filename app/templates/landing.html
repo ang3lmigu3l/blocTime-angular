@@ -1,7 +1,17 @@
 
 <div class="container">
-    <div class="left-panel" >Left Panel</div>
-    <div class="right-panel"><my-button></my-button></div>
+    <div class="left-panel">
+
+        <input ng-model="task" type="text" placeholder="Enter task..."></input>
+        <button ng-click="addTask()" class="btn btn-default">Add Task</button>
+        <ul class="list-group">
+          <li  ng-repeat="task in tasks " class="list-group-item">{{ task.name }}</li>      
+        </ul>
+    </div>
+    <div class="right-panel">
+        <my-button></my-button>
+    </div>
 </div>
 
 
+ 
