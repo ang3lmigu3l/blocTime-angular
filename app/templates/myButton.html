@@ -1,7 +1,8 @@
 <div class="timer-container">
     <h1 class= "timer-header">{{timerText}}</h1>
     <p id="time">{{ workTime | timecode }}</p>
-    <button class="btn btn-info" ng-click="toggleTimer()"><p>{{ buttonText }}</p></button>
+    <button class="btn btn-info" ng-click="toggleTimer()">{{ buttonText }}</button>
+    <button class='btn btn-danger' ng-show="timerRunning" ng-click='pauseTimer()'>{{pausedText}} </button>
     
     
 </div>

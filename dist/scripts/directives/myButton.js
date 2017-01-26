@@ -16,6 +16,10 @@
                 // starts countdown from current work/break time 
                 scope.timerText = "Work Timer";
                 
+                scope.isPaused = false; 
+                
+                scope.pausedText = "PAUSE";
+                
                 var completedSessions = 0;
                 
                 var timeSet;
@@ -27,6 +31,10 @@
                 var stopTimer = function() {
                     $interval.cancel(timeSet);
                 };
+                
+                var startTimer = function() {
+                    timeSet = $interval(scope.countdown,1000) ;
+                }
                 
                 
                                 
@@ -64,6 +72,7 @@
                 scope.countdown = function() {
                    if(scope.workTime <= 0){ 
                        stopTimer();
+                       scope.timerRunning = false;
                        //if countdown reaches 0  and is on break , set time to 25m (work) 
                        if (scope.onBreak) {
                            console.log("currently working");
@@ -85,6 +94,22 @@
                     }
                 };
                 
+                scope.pauseTimer = function(){
+                    if (scope.isPaused){ 
+                        console.log("Resume Timer")
+                        scope.pausedText = "PAUSE";
+                        scope.isPaused = false;
+                        startTimer();
+                        
+                    } else {
+                        console.log("Pause Timer")
+                        scope.isPaused = true;
+                        scope.pausedText = "RESUME" ;
+                        stopTimer();
+                        
+                    }
+                    
+                }
                            
                 scope.toggleTimer = function() {
                      if(scope.buttonText == "RESET") {
@@ -99,7 +124,8 @@
                              console.log( "restarted work timer");
                          };
                      } else {
-                         timeSet = $interval(scope.countdown,1000);
+                         startTimer();
+                         scope.timerRunning = true;
                          scope.buttonText = "RESET";
                          console.log("start countdown");
                      };
