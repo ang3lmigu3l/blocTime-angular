@@ -9,6 +9,10 @@
         $scope.task = "";
       };
         
+    $scope.deleteTask = function(task){
+        Tasks.removeTask(task);
+    }
+        
   }
     angular 
         .module('blocTime')

@@ -9,9 +9,15 @@
                 name: task
             });
         }
+        
+        var removeTask = function(task){
+            tasks.$remove(task);
+        }
         return {
             all: tasks,
-            createTask, createTask
+            createTask: createTask,
+            removeTask: removeTask 
+            
 
         }
     }
