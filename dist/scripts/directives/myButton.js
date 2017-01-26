@@ -20,7 +20,9 @@
                 
                 scope.pausedText = "PAUSE";
                 
-                var completedSessions = 0;
+                scope.completedSessions = 0;
+                
+                scope.intCounter = 0;
                 
                 var timeSet;
                 
@@ -59,7 +61,7 @@
                     scope.onBreak = false; 
                     scope.onLongBreak = true;
                     scope.timerText = "Long Break Timer";
-                    completedSessions = 0;
+                    scope.completedSessions = 0;
                 };
                 
                 scope.$watch('workTime', function(value){
@@ -78,10 +80,10 @@
                            console.log("currently working");
                            setWork();
                        } else {
-                           completedSessions += 1;
-                           console.log(completedSessions);
+                           scope.completedSessions += 1;
+                           console.log(scope.completedSessions);
                            // if 4 work sessions are completed and not on break set time to long break 
-                           if (completedSessions === 4) {
+                           if (scope.completedSessions === 4) {
                                setLongBreak();
                            } else {
                                setBreak();
@@ -106,6 +108,7 @@
                         scope.isPaused = true;
                         scope.pausedText = "RESUME" ;
                         stopTimer();
+                        scope.intCounter ++;
                         
                     }
                     

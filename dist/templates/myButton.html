@@ -3,6 +3,10 @@
     <p id="time">{{ workTime | timecode }}</p>
     <button class="btn btn-info" ng-click="toggleTimer()">{{ buttonText }}</button>
     <button class='btn btn-danger' ng-show="timerRunning" ng-click='pauseTimer()'>{{pausedText}} </button>
+    <br/>
+    <br />
+    <p class="badge centered-text">Interruptions: {{intCounter}}  | Completed Sessions: {{completedSessions}}</p>
+    
     
     
 </div>
